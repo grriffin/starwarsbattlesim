@@ -1,0 +1,106 @@
+
+@use 'variables' as *;
+
+@font-face {
+    font-family: "StarJedi";
+    src: url(/assets/Starjedi.ttf) format("truetype");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family:Arial, Helvetica, sans-serif;
+  margin:0;
+  padding:0;
+}
+
+header {
+  padding: .5rem 1rem;
+  display: flex;
+  align-items: center;
+  background-color: black;
+  .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .title {
+      padding-left: 1rem;
+      font-size:30pt;
+      line-height: 3rem;
+      color: $starwarsyellow;
+      font-family: "StarJedi", sans-serif;
+    }
+
+    .subtitle {
+      font-size: 12pt;
+      padding-left: 1rem;
+      color:rgb(175, 175, 175);
+    }
+  } 
+
+  nav {
+    ul {
+      list-style-type: none;
+      display: flex;
+      flex-direction: row;
+
+      li {
+        margin:0 1rem;
+        font-size: 16pt;
+        a {
+          text-decoration: none;
+          color: $starwarsyellow;
+
+          &:hover {
+            text-shadow:     0 0 7px #fff,
+              0 0 10px #fff,
+              0 0 21px #fff,
+              0 0 42px $starwarsyellow,
+              0 0 82px $starwarsyellow,
+              0 0 92px $starwarsyellow,
+              0 0 102px $starwarsyellow;
+              //0 0 151px $starwarsyellow;
+            color: $starwarsyellow;
+          }
+        }
+        
+      }
+    }
+  }
+}
+
+@keyframes spinner {
+    0% {
+        transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    }
+    100% {
+         transform: translate3d(-50%, -50%, 0) rotate(360deg);
+    }
+}
+
+.spinner {
+    // The height here is just for demo purposes
+    height: 100vh;
+    opacity: 1;
+    position: relative;
+    transition: opacity linear 0.1s;    
+    &::before {
+        animation: 2s linear infinite spinner;
+        border: solid 3px #eee;
+        border-bottom-color: #EF6565;
+        border-radius: 50%;
+        content: "";
+        height: 40px;
+        left: 50%;
+        opacity: inherit;
+        position: absolute;
+        top: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        transform-origin: center;
+        width: 40px;
+        will-change: transform;
+    }
+}

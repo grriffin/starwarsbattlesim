@@ -1,0 +1,87 @@
+@font-face {
+  font-family: "StarJedi";
+  src: url(/assets/Starjedi.ttf) format("truetype");
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  background-color: black;
+}
+header .logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+header .logo .title {
+  padding-left: 1rem;
+  font-size: 30pt;
+  line-height: 3rem;
+  color: #FFE81F;
+  font-family: "StarJedi", sans-serif;
+}
+header .logo .subtitle {
+  font-size: 12pt;
+  padding-left: 1rem;
+  color: rgb(175, 175, 175);
+}
+header nav ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+}
+header nav ul li {
+  margin: 0 1rem;
+  font-size: 16pt;
+}
+header nav ul li a {
+  text-decoration: none;
+  color: #FFE81F;
+}
+header nav ul li a:hover {
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #FFE81F, 0 0 82px #FFE81F, 0 0 92px #FFE81F, 0 0 102px #FFE81F;
+  color: #FFE81F;
+}
+
+@keyframes spinner {
+  0% {
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
+}
+.spinner {
+  height: 100vh;
+  opacity: 1;
+  position: relative;
+  transition: opacity linear 0.1s;
+}
+.spinner::before {
+  animation: 2s linear infinite spinner;
+  border: solid 3px #eee;
+  border-bottom-color: #EF6565;
+  border-radius: 50%;
+  content: "";
+  height: 40px;
+  left: 50%;
+  opacity: inherit;
+  position: absolute;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  transform-origin: center;
+  width: 40px;
+  will-change: transform;
+}
+
+/*# sourceMappingURL=style.css.map */
