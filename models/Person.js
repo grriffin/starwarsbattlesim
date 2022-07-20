@@ -1,8 +1,6 @@
+import { get } from '../util.js';
 
-import { get } from '../util.js'
-
-export class Person {
-  
+export default class Person {
   #person;
 
   static async load(url) {
@@ -12,55 +10,58 @@ export class Person {
 
   constructor(person) {
     this.#person = person;
-    
   }
 
-  birthYear() {
+  get birthYear() {
     return this.#person.birth_year;
   }
-  
-  eyeColor() {
+
+  get eyeColor() {
     return this.#person.eye_color;
   }
 
-  gender() {
+  get gender() {
     return this.#person.gender;
   }
 
-  hairColor() {
+  get hairColor() {
     return this.#person.hair_color;
   }
 
-  height() {
+  get height() {
     return this.#person.height;
   }
 
-  homeworld() {
+  get homeworld() {
     return this.#person.homeworld;
   }
 
-  mass() {
+  get mass() {
     return this.#person.mass;
   }
 
-  name() {
+  get name() {
     return this.#person.name;
   }
 
-  skinColor() {
+  get skinColor() {
     return this.#person.skin_color;
   }
 
-  species() {
+  get species() {
     return this.#person.species;
   }
 
-  starships() {
+  get starships() {
     return this.#person.starships;
   }
 
-  vehicles() {
+  get vehicles() {
     return this.#person.vehicles;
+  }
+
+  toJson() {
+    return JSON.stringify(this.#person);
   }
 }
 

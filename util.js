@@ -13,12 +13,11 @@ export function get(url) {
 }
 
 export async function spin(element, action) {
-
   const loadingElement = document.getElementById(element);
-  if ( !loadingElement.classList.contains('spinner') ) {
+  if (!loadingElement.classList.contains('spinner')) {
     loadingElement.classList.add('spinner');
   }
   await action();
-  
+
   loadingElement.classList.remove('spinner');
 }

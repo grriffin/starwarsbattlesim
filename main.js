@@ -1,8 +1,12 @@
-import {StarWars} from "./models/StarWars.js";
-import {spin} from "./util.js"
-import {PeopleCache} from "./repository.js";
+import { spin } from './util.js';
+import StarWarsController from './StarWarsController.js';
 
 window.onload = async (event) => {
+  //spin('loader', async () => {
+  const controller = new StarWarsController('#people-list', '#person-detail');
+  await controller.init();
+  //});
+  /*
   spin('loader', async () => {
     const peopleCache = new PeopleCache();
     const sw = new StarWars();
@@ -19,5 +23,5 @@ window.onload = async (event) => {
       pe.innerHTML = `<a href=${p.url}>${p.name}</a>`;
       peopleElement.appendChild(pe);
     }
-  });
+  });*/
 };
