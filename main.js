@@ -3,7 +3,12 @@ import StarWarsController from './StarWarsController.js';
 
 window.onload = async (event) => {
   //spin('loader', async () => {
-  const controller = new StarWarsController('#people-list', '#person-detail');
+  const controller = new StarWarsController(
+    '#people-list',
+    '#person-detail',
+    '#team-container',
+    '#start-battle-section'
+  );
   await controller.init();
   //});
   /*

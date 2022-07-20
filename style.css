@@ -27,7 +27,7 @@ header .logo .title {
   padding-left: 1rem;
   font-size: 30pt;
   line-height: 3rem;
-  color: #FFE81F;
+  color: #ffe81f;
   font-family: "StarJedi", sans-serif;
 }
 header .logo .subtitle {
@@ -46,11 +46,11 @@ header nav ul li {
 }
 header nav ul li a {
   text-decoration: none;
-  color: #FFE81F;
+  color: #ffe81f;
 }
 header nav ul li a:hover {
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #FFE81F, 0 0 82px #FFE81F, 0 0 92px #FFE81F, 0 0 102px #FFE81F;
-  color: #FFE81F;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #ffe81f, 0 0 82px #ffe81f, 0 0 92px #ffe81f, 0 0 102px #ffe81f;
+  color: #ffe81f;
 }
 
 article {
@@ -58,23 +58,122 @@ article {
   height: 100%;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 .people-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100%;
+}
+@media only screen and (min-width: 668px) and (max-width: 1024px) {
+  .people-container {
+    flex-direction: row;
+  }
 }
 
 #people-list {
-  margin-left: 1rem;
   height: 100%;
-  width: fit-content;
-  list-style-type: none;
-  padding-inline-start: 0;
-  overflow: auto;
+  margin-top: 2px;
 }
-#people-list li:hover {
-  background-color: gold;
-  color: rgb(6, 6, 42);
+#people-list select.listbox {
+  display: none;
+}
+@media only screen and (min-width: 668px) and (max-width: 1024px) {
+  #people-list select.listbox {
+    display: block;
+    margin-right: 1rem;
+  }
+}
+#people-list select.dropdown {
+  display: block;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+@media only screen and (min-width: 668px) and (max-width: 1024px) {
+  #people-list select.dropdown {
+    display: none;
+  }
+}
+
+#person-detail div {
+  padding: 0;
+  border: 2px solid black;
+  border-radius: 4px;
+  border-spacing: 0;
+}
+#person-detail div p:first-child {
+  padding: 0.5rem;
+  background-color: black;
+  color: #ffe81f;
+  margin-bottom: 0.25rem;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+#person-detail div p {
+  margin: 0;
+  padding: 0 0.5rem;
+}
+#person-detail div button {
+  width: 60%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin-left: 20%;
+  margin: 1rem 20% 1rem 20%;
+}
+
+.person-card {
+  padding: 0;
+  margin-top: 1rem;
+  border: 2px solid black;
+  border-radius: 4px;
+  border-spacing: 0;
+}
+.person-card p:first-child {
+  padding: 0.5rem;
+  background-color: black;
+  color: #ffe81f;
+  margin-bottom: 0.25rem;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.person-card p {
+  margin: 0;
+  padding: 0 0.5rem;
+}
+.person-card button {
+  width: 60%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin: 1rem 20% 1rem 20%;
+}
+
+#start {
+  width: 80%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background-color: #ffe81f;
+  font-size: larger;
+  font-weight: 700;
+  border-radius: 6px;
+  margin: 1rem 10% 1rem 10%;
+}
+
+#team-container {
+  display: flex;
+  flex-direction: column;
+}
+@media only screen and (min-width: 668px) and (max-width: 1024px) {
+  #team-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+#start-battle-section h3 {
+  text-align: center;
 }
 
 @keyframes spinner {

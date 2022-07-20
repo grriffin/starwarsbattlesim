@@ -71,22 +71,125 @@ article {
   height: 100%;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 .people-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100%;
+
+  @include for_breakpoint(tablet) {
+    flex-direction: row;
+  }
 }
 
 #people-list {
-  margin-left: 1rem;
   height: 100%;
-  width: fit-content;
-  list-style-type: none;
-  padding-inline-start: 0;
-  overflow: auto;
-  li:hover {
-    background-color: gold;
-    color: rgb(6, 6, 42);
+  margin-top: 2px;
+  select.listbox {
+    display: none;
+    @include for_breakpoint(tablet) {
+      display: block;
+      margin-right: 1rem;
+    }
+  }
+
+  select.dropdown {
+    display: block;
+    margin-bottom: 1rem;
+    width: 100%;
+    @include for_breakpoint(tablet) {
+      display: none;
+    }
+  }
+}
+
+#person-detail {
+  div {
+    padding: 0;
+    border: 2px solid black;
+    border-radius: 4px;
+    border-spacing: 0;
+    p:first-child {
+      padding: 0.5rem;
+      background-color: black;
+      color: $starwarsyellow;
+      margin-bottom: 0.25rem;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+
+    p {
+      margin: 0;
+      padding: 0 0.5rem;
+    }
+
+    button {
+      width: 60%;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      margin-left: 20%;
+      margin: 1rem 20% 1rem 20%;
+    }
+  }
+}
+
+.person-card {
+  padding: 0;
+  margin-top: 1rem;
+  border: 2px solid black;
+  border-radius: 4px;
+  border-spacing: 0;
+  p:first-child {
+    padding: 0.5rem;
+    background-color: black;
+    color: $starwarsyellow;
+    margin-bottom: 0.25rem;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+
+  p {
+    margin: 0;
+    padding: 0 0.5rem;
+  }
+
+  button {
+    width: 60%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    margin: 1rem 20% 1rem 20%;
+  }
+}
+
+#start {
+  width: 80%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background-color: $starwarsyellow;
+  font-size: larger;
+  font-weight: 700;
+  border-radius: 6px;
+  margin: 1rem 10% 1rem 10%;
+}
+
+#team-container {
+  display: flex;
+  flex-direction: column;
+
+  @include for_breakpoint(tablet) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+#start-battle-section {
+  h3 {
+    text-align: center;
   }
 }
 

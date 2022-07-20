@@ -12,12 +12,23 @@ export function get(url) {
     });
 }
 
-export async function spin(element, action) {
-  const loadingElement = document.getElementById(element);
+export async function spinWhile(loadingElement, action) {
   if (!loadingElement.classList.contains('spinner')) {
     loadingElement.classList.add('spinner');
   }
-  await action();
+  try {
+    await action();
+  } finally {
+    loadingElement.classList.remove('spinner');
+  }
+}
 
-  loadingElement.classList.remove('spinner');
+export function spin(element) {
+  if (!element.classList.contains('spinner')) {
+    element.classList.add('spinner');
+  }
+}
+
+export function unspin(element) {
+  element.classList.remove('spinner');
 }

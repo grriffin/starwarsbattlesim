@@ -2,9 +2,12 @@ import { get } from '../util.js';
 import PersonSummary from './PersonSummary.js';
 import Person from './Person.js';
 
+//const BaseUrl = 'https://swapi.dev'
+const BaseUrl = 'http://localhost:8000';
+
 export default class StarWars {
   async getPeople() {
-    var page = await get('https://swapi.dev/api/people/');
+    var page = await get(`${BaseUrl}/api/people/`);
     console.dir(page);
     let people = [];
 
@@ -24,7 +27,24 @@ export default class StarWars {
   }
 
   async getPerson(url) {
-    var person = await get(url);
-    return new Person(person);
+    let person = await get(url);
+    if (person) {
+      if (person.homeworld) {
+        const homeworld = await get(person.homeworld);
+        person['homeworld'] = homeworld.name;
+      }
+
+      if (person.species.length > 0) {
+        const species = await get(person.species[0]);
+        person['species'] = species.name;
+      } else {
+        person['species'] = 'Not Specified';
+      }
+      const newPerson = new Person(person);
+      return newPerson;
+    }
+
+    console.log(`Getting person from ${url} did not return valid data`);
+    return null;
   }
 }

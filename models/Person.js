@@ -1,12 +1,5 @@
-import { get } from '../util.js';
-
 export default class Person {
   #person;
-
-  static async load(url) {
-    let p = await get(url);
-    return new Person(p);
-  }
 
   constructor(person) {
     this.#person = person;
