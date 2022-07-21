@@ -23,6 +23,25 @@ body {
   min-width: 250px;
 }
 
+article {
+  max-width: 960px;
+  height: 100%;
+  margin: 0 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media only screen and (min-width: 668px) {
+  article {
+    margin: 0 2em;
+  }
+}
+@media only screen and (min-width: 1025px) {
+  article {
+    margin: 0 auto;
+  }
+}
+
 header {
   display: flex;
   background-color: var(--black);
@@ -157,11 +176,6 @@ header nav ul li a:hover {
   }
 }
 
-article {
-  margin: 0 2rem;
-  height: 100%;
-}
-
 .hidden {
   visibility: hidden;
 }
@@ -266,6 +280,7 @@ h3 {
 
 #start {
   width: 80%;
+  max-width: 300px;
   padding-top: 4px;
   padding-bottom: 4px;
   background-color: #71989c;
@@ -273,7 +288,7 @@ h3 {
   font-size: larger;
   font-weight: 700;
   border-radius: 6px;
-  margin: 1rem 10% 1rem 10%;
+  margin: 1rem;
 }
 #start:hover {
   color: #ffe81f;
@@ -292,10 +307,6 @@ h3 {
     flex-wrap: wrap;
     gap: 1rem;
   }
-}
-
-#start-battle-section h3 {
-  text-align: center;
 }
 
 @keyframes spinner {

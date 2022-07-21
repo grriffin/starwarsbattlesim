@@ -16,7 +16,9 @@ $media_queries: (
     ),
   'tabletandup': unquote('only screen and (min-width: 668px)'),
   'desktop':
-    unquote('only screen and min-width: #{$size__site_content_width_plus_one})'),
+    unquote(
+      'only screen and (min-width: #{$size__site_content_width_plus_one})'
+    ),
 );
 
 @mixin for_breakpoint($breakpoints) {
