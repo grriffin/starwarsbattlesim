@@ -14,10 +14,15 @@
           <div class="title">Start Wars</div>
           <div class="subtitle">Online Star Wars Battle Simulator</div>
         </div>
+        <input class="side-menu" type="checkbox" id="side-menu" />
+        <label class="menu-icon" for="side-menu"
+          ><span class="menu-line"></span
+        ></label>
+
         <nav>
-          <ul>
-            <li><a href="#">Setup a Battle</a></li>
-            <li><a href="#">Battle History</a></li>
+          <ul class="menu">
+            <li><a href="index.html">Setup a Battle</a></li>
+            <li><a href="battles.html">Battle History</a></li>
           </ul>
         </nav>
       </header>
@@ -30,8 +35,11 @@
             <div id="person-detail"></div>
           </div>
         </section>
+        <br />
+        <hr />
         <section id="team">
           <h3>Current Team</h3>
+          <p id="errors"></p>
           <div id="team-container">
             <p>No Team Members Added</p>
           </div>

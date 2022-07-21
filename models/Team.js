@@ -1,39 +1,62 @@
 import Person from './Person.js';
 
 export default class Team {
-  constructor() {
-    this.teamMembers = [];
+  constructor(name = '') {
+    this._teamMembers = [];
+    this._name = name;
+  }
+
+  get name() {
+    return this._name;
+  }
+  set name(n) {
+    this._name = n;
+  }
+
+  get teamMembers() {
+    return this._teamMembers;
   }
 
   addPerson(person) {
-    const found = this.teamMembers.find((tm) => tm.name == person.name);
+    const found = this._teamMembers.find((tm) => tm.name == person.name);
     if (!found) {
-      this.teamMembers.push(person);
+      this._teamMembers.push(person);
     } else {
       alert('Sorry, that person already exists on the team!');
     }
   }
 
   removePerson(person) {
-    const indexToDelete = this.teamMembers.indexOf(person);
-    this.teamMembers.splice(indexToDelete, 1);
+    const indexToDelete = this._teamMembers.indexOf(person);
+    this._teamMembers.splice(indexToDelete, 1);
   }
 
   score() {
-    if (this.teamMembers.length == 0) {
-      return 0;
+    let score = 0;
+    if (this._teamMembers && this._teamMembers.length > 0) {
+      for (const p of this._teamMembers) {
+        score += p.effectiveScore();
+      }
     }
-
-    return this.teamMembers.length;
+    return score;
   }
 
   readyForBattle() {
-    return this.teamMembers.length > 0;
+    return this._teamMembers.length > 0;
   }
 
-  static fromObjects(personObjects) {
-    const team = new Team();
-    team.teamMembers = personObjects.map((p) => new Person(p));
+  toJSON() {
+    return {
+      name: this._name,
+      teamMembers: this._teamMembers.map((m) => m.person()),
+    };
+  }
+
+  static fromJsonObject(teamObject) {
+    const team = new Team(teamObject.name ?? '');
+    if (teamObject.teamMembers) {
+      team._teamMembers = teamObject.teamMembers.map((p) => new Person(p));
+    }
     return team;
   }
 }

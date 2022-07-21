@@ -53,8 +53,20 @@ export default class Person {
     return this.#person.vehicles;
   }
 
-  toJson() {
-    return JSON.stringify(this.#person);
+  effectiveScore() {
+    let score = (this.mass ?? 1) * (this.vehicles?.length ?? 0);
+    if (this.species == 'Droid') {
+      score += 150;
+    }
+    return score;
+  }
+
+  person() {
+    return this.#person;
+  }
+
+  toJSON() {
+    return this.#person;
   }
 }
 

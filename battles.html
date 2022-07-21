@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Star Wars Battle Simulator - Battle Histories</title>
+    <title>Star Wars Battle Simulator</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -14,16 +14,26 @@
           <div class="title">Start Wars</div>
           <div class="subtitle">Online Star Wars Battle Simulator</div>
         </div>
+        <input class="side-menu" type="checkbox" id="side-menu" />
+        <label class="menu-icon" for="side-menu"
+          ><span class="menu-line"></span
+        ></label>
+
         <nav>
-          <ul>
-            <li><a href="#">Setup a Battle</a></li>
-            <li><a href="#">Battle History</a></li>
+          <ul class="menu">
+            <li><a href="index.html">Setup a Battle</a></li>
+            <li><a href="battles.html">Battle History</a></li>
           </ul>
         </nav>
       </header>
 
-      <article></article>
+      <article>
+        <section id="battles">
+          <h3>Your Battles</h3>
+          <div id="battle-list">
+          </div>
+      </article>
     </main>
-    <script src="main.js" type="module"></script>
+    <script src="mainb.js" type="module"></script>
   </body>
 </html>

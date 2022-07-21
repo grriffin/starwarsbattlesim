@@ -1,36 +1,58 @@
 @use 'variables' as *;
 
+:root {
+  --white: #f9f9f9;
+  --black: #36383f;
+  --gray: #85888c;
+  --yellow: #ffe81f;
+}
+
 @font-face {
   font-family: 'StarJedi';
   src: url(/assets/Starjedi.ttf) format('truetype');
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
+  background-color: var(--white);
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
+  min-width: 250px;
 }
 
 header {
-  padding: 0.5rem 1rem;
+  //padding: 0.5rem 1rem;
   display: flex;
-  align-items: center;
-  background-color: black;
+  //align-items: center;
+  background-color: var(--black);
+  box-shadow: 1px 1px 5px 0px var(--gray);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  margin-bottom: 2rem;
+
   .logo {
-    display: flex;
+    flex-grow: 1;
+    display: inline-block;
     flex-direction: column;
     align-items: center;
 
     .title {
       padding-left: 1rem;
-      font-size: 30pt;
+      font-size: 24pt;
       line-height: 3rem;
       color: $starwarsyellow;
       font-family: 'StarJedi', sans-serif;
+
+      @include for_breakpoint(tabletandup) {
+        font-size: 30pt;
+      }
     }
 
     .subtitle {
@@ -40,19 +62,98 @@ header {
     }
   }
 
+  .menu-icon {
+    cursor: pointer;
+    float: right;
+    padding: 40px 20px;
+
+    @include for_breakpoint(tabletandup) {
+      display: none;
+    }
+  }
+
+  .menu-line {
+    background: var(--white);
+    display: block;
+    height: 2px;
+    position: relative;
+    width: 24px;
+  }
+
+  .menu-line::before,
+  .menu-line::after {
+    background: var(--white);
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all 0.2s ease-out;
+    width: 100%;
+  }
+  .menu-line::before {
+    top: 5px;
+  }
+  .menu-line::after {
+    top: -5px;
+  }
+
+  .side-menu:checked ~ nav {
+    max-height: 100%;
+  }
+
+  .side-menu {
+    display: none;
+  } /* Hide checkbox */
+  /* Toggle menu icon */
+
+  .side-menu:checked ~ .menu-icon .menu-line {
+    background: transparent;
+  }
+  .side-menu:checked ~ .menu-icon .menu-line::before {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+  .side-menu:checked ~ .menu-icon .menu-line::after {
+    transform: rotate(45deg);
+    top: 0;
+  }
+
   nav {
+    width: 100%;
+    height: 100%;
+    top: 80px;
+    position: fixed;
+    background-color: var(--black);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease-out;
+
+    @include for_breakpoint(tabletandup) {
+      max-height: none;
+      top: 0;
+      position: relative;
+      float: right;
+      width: fit-content;
+    }
+
     ul {
       list-style-type: none;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
 
       li {
         margin: 0 1rem;
         font-size: 16pt;
+
+        @include for_breakpoint(tabletandup) {
+          float: left;
+        }
+
         a {
           text-decoration: none;
           color: $starwarsyellow;
-
+          display: block;
+          padding: 1rem;
           &:hover {
             text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,
               0 0 42px $starwarsyellow, 0 0 82px $starwarsyellow,
@@ -61,6 +162,11 @@ header {
             color: $starwarsyellow;
           }
         }
+      }
+
+      @include for_breakpoint(tabletandup) {
+        display: flex;
+        flex-direction: row;
       }
     }
   }
@@ -80,7 +186,7 @@ article {
   flex-direction: column;
   height: 100%;
 
-  @include for_breakpoint(tablet) {
+  @include for_breakpoint(tabletandup) {
     flex-direction: row;
   }
 }
@@ -88,9 +194,11 @@ article {
 #people-list {
   height: 100%;
   margin-top: 2px;
+
   select.listbox {
     display: none;
-    @include for_breakpoint(tablet) {
+    font-size: large;
+    @include for_breakpoint(tabletandup) {
       display: block;
       margin-right: 1rem;
     }
@@ -100,7 +208,8 @@ article {
     display: block;
     margin-bottom: 1rem;
     width: 100%;
-    @include for_breakpoint(tablet) {
+    font-size: large;
+    @include for_breakpoint(tabletandup) {
       display: none;
     }
   }
@@ -132,6 +241,8 @@ article {
       padding-bottom: 4px;
       margin-left: 20%;
       margin: 1rem 20% 1rem 20%;
+      background-color: $newhopeblue;
+      color: var(--white);
     }
   }
 }
@@ -139,12 +250,12 @@ article {
 .person-card {
   padding: 0;
   margin-top: 1rem;
-  border: 2px solid black;
+  border: 2px solid var(--black);
   border-radius: 4px;
   border-spacing: 0;
   p:first-child {
     padding: 0.5rem;
-    background-color: black;
+    background-color: var(--black);
     color: $starwarsyellow;
     margin-bottom: 0.25rem;
     border-top-left-radius: 4px;
@@ -160,30 +271,49 @@ article {
     width: 60%;
     padding-top: 4px;
     padding-bottom: 4px;
-
+    background-color: $sithorange;
+    color: var(--white);
     margin: 1rem 20% 1rem 20%;
   }
+}
+
+h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 #start {
   width: 80%;
   padding-top: 4px;
   padding-bottom: 4px;
-  background-color: $starwarsyellow;
+  background-color: $cloneblue;
+  color: var(--white);
   font-size: larger;
   font-weight: 700;
   border-radius: 6px;
   margin: 1rem 10% 1rem 10%;
+
+  &:hover {
+    color: $starwarsyellow;
+  }
 }
 
 #team-container {
-  display: flex;
-  flex-direction: column;
+  //display: flex;
+  //flex-direction: column;
 
-  @include for_breakpoint(tablet) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1rem;
+  input[type='text'] {
+    font-size: larger;
+  }
+
+  .person-card-container {
+    display: flex;
+    flex-direction: column;
+    @include for_breakpoint(tabletandup) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
   }
 }
 
@@ -215,36 +345,47 @@ article {
   animation: spinner 0.6s linear infinite;
 }
 
-/*
-.spinner {
-  // The height here is just for demo purposes
-  height: 100vh;
-  opacity: 1;
-  position: relative;
-  transition: opacity linear 0.1s;
-  &::before {
-    animation: 2s linear infinite spinner;
-    border: solid 3px #eee;
-    border-bottom-color: #ef6565;
-    border-radius: 50%;
-    content: '';
-    height: 40px;
-    left: 50%;
-    opacity: inherit;
-    position: absolute;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    transform-origin: center;
-    width: 40px;
-    will-change: transform;
+.battle-card {
+  border: 2px solid $sithorange;
+  border-radius: 4px;
+  border-spacing: 0;
+  color: black;
+  margin-bottom: 1rem;
+
+  .battle-header {
+    background-color: $sithorange;
+    color: white;
+    padding: 4px 4px;
+    margin-bottom: 4px;
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    align-items: center;
+    .title {
+      flex-grow: 1;
+      font-size: 1rem;
+    }
+    .score-card {
+      display: flex;
+      flex-direction: column;
+
+      .score-title {
+        margin-top: -2px;
+        width: 100%;
+        font-size: xx-small;
+        text-align: center;
+      }
+      .score {
+        text-align: center;
+      }
+    }
+  }
+
+  .fighters {
+    margin: 4px;
+
+    .fighter-card:nth-child(even) {
+      background-color: #ccc;
+    }
   }
 }
-
-@keyframes spinner {
-  0% {
-    transform: translate3d(-50%, -50%, 0) rotate(0deg);
-  }
-  100% {
-    transform: translate3d(-50%, -50%, 0) rotate(360deg);
-  }
-}*/

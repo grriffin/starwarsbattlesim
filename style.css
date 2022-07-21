@@ -1,56 +1,160 @@
+:root {
+  --white: #f9f9f9;
+  --black: #36383f;
+  --gray: #85888c;
+  --yellow: #ffe81f;
+}
+
 @font-face {
   font-family: "StarJedi";
   src: url(/assets/Starjedi.ttf) format("truetype");
 }
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
+  background-color: var(--white);
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
+  min-width: 250px;
 }
 
 header {
-  padding: 0.5rem 1rem;
   display: flex;
-  align-items: center;
-  background-color: black;
+  background-color: var(--black);
+  box-shadow: 1px 1px 5px 0px var(--gray);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  margin-bottom: 2rem;
+  /* Hide checkbox */
+  /* Toggle menu icon */
 }
 header .logo {
-  display: flex;
+  flex-grow: 1;
+  display: inline-block;
   flex-direction: column;
   align-items: center;
 }
 header .logo .title {
   padding-left: 1rem;
-  font-size: 30pt;
+  font-size: 24pt;
   line-height: 3rem;
   color: #ffe81f;
   font-family: "StarJedi", sans-serif;
+}
+@media only screen and (min-width: 668px) {
+  header .logo .title {
+    font-size: 30pt;
+  }
 }
 header .logo .subtitle {
   font-size: 12pt;
   padding-left: 1rem;
   color: rgb(175, 175, 175);
 }
+header .menu-icon {
+  cursor: pointer;
+  float: right;
+  padding: 40px 20px;
+}
+@media only screen and (min-width: 668px) {
+  header .menu-icon {
+    display: none;
+  }
+}
+header .menu-line {
+  background: var(--white);
+  display: block;
+  height: 2px;
+  position: relative;
+  width: 24px;
+}
+header .menu-line::before,
+header .menu-line::after {
+  background: var(--white);
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all 0.2s ease-out;
+  width: 100%;
+}
+header .menu-line::before {
+  top: 5px;
+}
+header .menu-line::after {
+  top: -5px;
+}
+header .side-menu:checked ~ nav {
+  max-height: 100%;
+}
+header .side-menu {
+  display: none;
+}
+header .side-menu:checked ~ .menu-icon .menu-line {
+  background: transparent;
+}
+header .side-menu:checked ~ .menu-icon .menu-line::before {
+  transform: rotate(-45deg);
+  top: 0;
+}
+header .side-menu:checked ~ .menu-icon .menu-line::after {
+  transform: rotate(45deg);
+  top: 0;
+}
+header nav {
+  width: 100%;
+  height: 100%;
+  top: 80px;
+  position: fixed;
+  background-color: var(--black);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease-out;
+}
+@media only screen and (min-width: 668px) {
+  header nav {
+    max-height: none;
+    top: 0;
+    position: relative;
+    float: right;
+    width: fit-content;
+  }
+}
 header nav ul {
   list-style-type: none;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 header nav ul li {
   margin: 0 1rem;
   font-size: 16pt;
 }
+@media only screen and (min-width: 668px) {
+  header nav ul li {
+    float: left;
+  }
+}
 header nav ul li a {
   text-decoration: none;
   color: #ffe81f;
+  display: block;
+  padding: 1rem;
 }
 header nav ul li a:hover {
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #ffe81f, 0 0 82px #ffe81f, 0 0 92px #ffe81f, 0 0 102px #ffe81f;
   color: #ffe81f;
+}
+@media only screen and (min-width: 668px) {
+  header nav ul {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 article {
@@ -67,7 +171,7 @@ article {
   flex-direction: column;
   height: 100%;
 }
-@media only screen and (min-width: 668px) and (max-width: 1024px) {
+@media only screen and (min-width: 668px) {
   .people-container {
     flex-direction: row;
   }
@@ -79,8 +183,9 @@ article {
 }
 #people-list select.listbox {
   display: none;
+  font-size: large;
 }
-@media only screen and (min-width: 668px) and (max-width: 1024px) {
+@media only screen and (min-width: 668px) {
   #people-list select.listbox {
     display: block;
     margin-right: 1rem;
@@ -90,8 +195,9 @@ article {
   display: block;
   margin-bottom: 1rem;
   width: 100%;
+  font-size: large;
 }
-@media only screen and (min-width: 668px) and (max-width: 1024px) {
+@media only screen and (min-width: 668px) {
   #people-list select.dropdown {
     display: none;
   }
@@ -121,18 +227,20 @@ article {
   padding-bottom: 4px;
   margin-left: 20%;
   margin: 1rem 20% 1rem 20%;
+  background-color: #2c8bcf;
+  color: var(--white);
 }
 
 .person-card {
   padding: 0;
   margin-top: 1rem;
-  border: 2px solid black;
+  border: 2px solid var(--black);
   border-radius: 4px;
   border-spacing: 0;
 }
 .person-card p:first-child {
   padding: 0.5rem;
-  background-color: black;
+  background-color: var(--black);
   color: #ffe81f;
   margin-bottom: 0.25rem;
   border-top-left-radius: 4px;
@@ -146,26 +254,40 @@ article {
   width: 60%;
   padding-top: 4px;
   padding-bottom: 4px;
+  background-color: #b64419;
+  color: var(--white);
   margin: 1rem 20% 1rem 20%;
+}
+
+h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 #start {
   width: 80%;
   padding-top: 4px;
   padding-bottom: 4px;
-  background-color: #ffe81f;
+  background-color: #71989c;
+  color: var(--white);
   font-size: larger;
   font-weight: 700;
   border-radius: 6px;
   margin: 1rem 10% 1rem 10%;
 }
+#start:hover {
+  color: #ffe81f;
+}
 
-#team-container {
+#team-container input[type=text] {
+  font-size: larger;
+}
+#team-container .person-card-container {
   display: flex;
   flex-direction: column;
 }
-@media only screen and (min-width: 668px) and (max-width: 1024px) {
-  #team-container {
+@media only screen and (min-width: 668px) {
+  #team-container .person-card-container {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1rem;
@@ -197,38 +319,45 @@ article {
   animation: spinner 0.6s linear infinite;
 }
 
-/*
-.spinner {
-  // The height here is just for demo purposes
-  height: 100vh;
-  opacity: 1;
-  position: relative;
-  transition: opacity linear 0.1s;
-  &::before {
-    animation: 2s linear infinite spinner;
-    border: solid 3px #eee;
-    border-bottom-color: #ef6565;
-    border-radius: 50%;
-    content: '';
-    height: 40px;
-    left: 50%;
-    opacity: inherit;
-    position: absolute;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    transform-origin: center;
-    width: 40px;
-    will-change: transform;
-  }
+.battle-card {
+  border: 2px solid #b64419;
+  border-radius: 4px;
+  border-spacing: 0;
+  color: black;
+  margin-bottom: 1rem;
 }
-
-@keyframes spinner {
-  0% {
-    transform: translate3d(-50%, -50%, 0) rotate(0deg);
-  }
-  100% {
-    transform: translate3d(-50%, -50%, 0) rotate(360deg);
-  }
-}*/
+.battle-card .battle-header {
+  background-color: #b64419;
+  color: white;
+  padding: 4px 4px;
+  margin-bottom: 4px;
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  align-items: center;
+}
+.battle-card .battle-header .title {
+  flex-grow: 1;
+  font-size: 1rem;
+}
+.battle-card .battle-header .score-card {
+  display: flex;
+  flex-direction: column;
+}
+.battle-card .battle-header .score-card .score-title {
+  margin-top: -2px;
+  width: 100%;
+  font-size: xx-small;
+  text-align: center;
+}
+.battle-card .battle-header .score-card .score {
+  text-align: center;
+}
+.battle-card .fighters {
+  margin: 4px;
+}
+.battle-card .fighters .fighter-card:nth-child(even) {
+  background-color: #ccc;
+}
 
 /*# sourceMappingURL=style.css.map */

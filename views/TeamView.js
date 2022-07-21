@@ -6,8 +6,16 @@ export default class TeamView {
       teamElement.replaceChildren(noMembers);
       return;
     }
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.name = 'team-name';
+    nameInput.value = team.name;
+    nameInput.required = true;
+    nameInput.minLength = 3;
+    nameInput.placeholder = 'Please enter a team name';
 
-    let details = [];
+    const details = document.createElement('div');
+    details.classList.add('person-card-container');
     for (const person of team.teamMembers) {
       const detail = document.createElement('div');
       detail.classList.add('person-card');
@@ -24,9 +32,10 @@ export default class TeamView {
       removeButton.innerText = 'Remove';
       removeButton.addEventListener('click', (event) => onRemoveClick(person));
       detail.appendChild(removeButton);
-      details.push(detail);
+      details.appendChild(detail);
     }
 
-    teamElement.replaceChildren(...details);
+    teamElement.replaceChildren(nameInput, details);
+    return nameInput;
   }
 }

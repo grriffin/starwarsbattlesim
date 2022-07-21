@@ -22,7 +22,7 @@ export class PeopleCache {
 export class PeopleDetailCache {
   save(url, person) {
     if (person) {
-      localStorage.setItem(url, person.toJson());
+      localStorage.setItem(url, JSON.stringify(person));
     }
   }
 
@@ -38,9 +38,28 @@ export class PeopleDetailCache {
 }
 
 export class BattleHistory {
+  saveCurrentTeam(team) {
+    if (!team) {
+      localStorage.removeItem('currentTeam');
+      return;
+    }
+    localStorage.setItem('currentTeam', JSON.stringify(team));
+  }
+
+  loadCurrentTeam() {
+    const currentTeam = localStorage.getItem('currentTeam');
+    if (currentTeam) {
+      return Team.fromJsonObject(JSON.parse(currentTeam));
+    }
+    return null;
+  }
+
   save(battle) {
     //Not the most efficient, but OK for now.
-    const battles = load();
+    let battles = this.load();
+    if (!battles) {
+      battles = [];
+    }
     battles.push(battle);
     localStorage.setItem('battles', JSON.stringify(battles));
   }
@@ -49,10 +68,7 @@ export class BattleHistory {
     const battleJson = localStorage.getItem('battles');
     if (battleJson) {
       const battles = JSON.parse(battleJson);
-      return battles.map((b) => {
-        const team = Team.fromObjects(b);
-        return new Battle(team);
-      });
+      return battles.map((b) => Battle.fromJsonObject(b));
     }
     return null;
   }

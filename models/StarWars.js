@@ -2,12 +2,12 @@ import { get } from '../util.js';
 import PersonSummary from './PersonSummary.js';
 import Person from './Person.js';
 
-//const BaseUrl = 'https://swapi.dev'
-const BaseUrl = 'http://localhost:8000';
+const ProductionBaseUrl = 'https://swapi.dev';
+const LocalBaseUrl = 'http://localhost:8000';
 
 export default class StarWars {
   async getPeople() {
-    var page = await get(`${BaseUrl}/api/people/`);
+    var page = await get(`${ProductionBaseUrl}/api/people/`);
     console.dir(page);
     let people = [];
 

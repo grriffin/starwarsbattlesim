@@ -15,9 +15,13 @@ export default class PeopleView {
       // queries.
       const selectorDropDown = document.createElement('select');
       selectorDropDown.classList.add('dropdown');
+      const dummyOption = document.createElement('option');
+      dummyOption.value = '';
+      dummyOption.innerText = 'Select a figher...';
+      selectorDropDown.appendChild(dummyOption);
       const selectorListBox = document.createElement('select');
       selectorListBox.classList.add('listbox');
-      selectorListBox.size = 14;
+      selectorListBox.size = 10;
 
       for (const p of peopleList) {
         const option = document.createElement('option');
@@ -67,17 +71,21 @@ export default class PeopleView {
     spin(parent);
     try {
       const person = await personLoader();
+      if (person == null) {
+        parent.replaceChildren();
+        return;
+      }
       const detail = document.createElement('div');
       detail.classList.add('person-detail');
       detail.innerHTML =
-        `<p>Name: ${person.name}</p>` +
+        `<p>${person.name} Details</p>` +
         `<p>Species: ${person.species}</p>` +
         `<p>Eye Color: ${person.eyeColor}</p>` +
         `<p>Hair Color: ${person.hairColor}</p>` +
         `<p>Mass: ${person.mass}</p>` +
         `<p>Homeworld: ${person.homeworld}</p>` +
-        `<p>Number of vehicles: ${person.vehicles.length ?? 0}</p>` +
-        `<p>Number of starships: ${person.starships.length ?? 0}</p>`;
+        `<p>Number of vehicles: ${person.vehicles?.length ?? 0}</p>` +
+        `<p>Number of starships: ${person.starships?.length ?? 0}</p>`;
       const addButton = document.createElement('button');
       addButton.innerText = 'Add To Team';
       addButton.addEventListener('click', (event) => onAddClick(person));

@@ -1,4 +1,9 @@
 $starwarsyellow: #ffe81f;
+$newhopeblue: #2c8bcf;
+$sithorange: #b64419;
+$cloneblue: #71989c;
+$clonegreen: #c4c6b7;
+$clonegray: #373738;
 
 $size__site_content_width: 1024px;
 $size__site_content_width_plus_one: 1025px;
@@ -9,6 +14,7 @@ $media_queries: (
     unquote(
       'only screen and (min-width: 668px) and (max-width: #{$size__site_content_width})'
     ),
+  'tabletandup': unquote('only screen and (min-width: 668px)'),
   'desktop':
     unquote('only screen and min-width: #{$size__site_content_width_plus_one})'),
 );
